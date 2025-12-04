@@ -1,3 +1,10 @@
+// Manual overrides for problematic stadiums
+const stadiumOverrides = {
+  // Stadium name: [lat, lon]
+  "Stadio San Paolo": { lat: 40.827, lon: 14.193 }, // Napoli
+  "Stadio Atleti Azzurri d'Italia": { lat: 45.695, lon: 9.674 }, // Atalanta (old name, now Gewiss Stadium)
+  "Gewiss Stadium": { lat: 45.695, lon: 9.674 }, // Atalanta (new name)
+};
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
@@ -37,11 +44,17 @@ async function fetchAndCacheStadiums() {
   const teams = resp.data.teams;
   const stadiums = [];
   for (const team of teams) {
-    const address = team.address || team.venue || team.name;
-    const coords = await geocodeAddress(address);
+    // Use only stadium name for geocoding, with manual overrides for problematic stadiums
+    let coords = { lat: 0, lon: 0 };
+    const stadiumName = team.venue || 'Unknown';
+    if (stadiumOverrides[stadiumName]) {
+      coords = stadiumOverrides[stadiumName];
+    } else if (stadiumName !== 'Unknown') {
+      coords = await geocodeAddress(stadiumName);
+    }
     stadiums.push({
-      id: team.venue || team.id,
-      stadium_name: team.venue || 'Unknown',
+      id: stadiumName || team.id,
+      stadium_name: stadiumName,
       lat: coords.lat,
       lon: coords.lon,
       capacity: null,

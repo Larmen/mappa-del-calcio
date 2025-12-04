@@ -1,11 +1,11 @@
 {
-  "lastUpdated": "2025-12-04T18:51:09.415Z",
+  "lastUpdated": "2025-12-04T19:08:58.854Z",
   "stadiums": [
     {
       "id": "Stadio Giuseppe Meazza",
       "stadium_name": "Stadio Giuseppe Meazza",
-      "lat": 45.4736472,
-      "lon": 9.1947493,
+      "lat": 45.4782003,
+      "lon": 9.123964,
       "capacity": null,
       "team": {
         "id": 98,
@@ -15,13 +15,13 @@
         "city": "Via Filippo Turati 3 Milano 20121"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:50:51.188Z"
+      "last_updated": "2025-12-04T19:08:41.847Z"
     },
     {
       "id": "Stadio Artemio Franchi",
       "stadium_name": "Stadio Artemio Franchi",
-      "lat": 43.7801528,
-      "lon": 11.2809011,
+      "lat": 43.3216868,
+      "lon": 11.326179,
       "capacity": null,
       "team": {
         "id": 99,
@@ -31,13 +31,13 @@
         "city": "Viale Manfredo Fanti 4 Firenze 50137"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:50:52.108Z"
+      "last_updated": "2025-12-04T19:08:42.927Z"
     },
     {
       "id": "Stadio Olimpico",
       "stadium_name": "Stadio Olimpico",
-      "lat": 0,
-      "lon": 0,
+      "lat": 41.9339424,
+      "lon": 12.4547705,
       "capacity": null,
       "team": {
         "id": 100,
@@ -47,13 +47,13 @@
         "city": "Via di Trigoria km. 3,600 Roma 00128"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:50:52.624Z"
+      "last_updated": "2025-12-04T19:08:43.951Z"
     },
     {
       "id": "Stadio Atleti Azzurri d'Italia",
       "stadium_name": "Stadio Atleti Azzurri d'Italia",
-      "lat": 45.5940826,
-      "lon": 9.6052568,
+      "lat": 45.695,
+      "lon": 9.674,
       "capacity": null,
       "team": {
         "id": 102,
@@ -63,13 +63,13 @@
         "city": "Corso Europa, 46, Zingonia Ciserano 24040"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:50:53.339Z"
+      "last_updated": "2025-12-04T19:08:43.951Z"
     },
     {
       "id": "Stadio Renato Dall'Ara",
       "stadium_name": "Stadio Renato Dall'Ara",
-      "lat": 44.4932666,
-      "lon": 11.2627412,
+      "lat": 44.492317,
+      "lon": 11.3099971,
       "capacity": null,
       "team": {
         "id": 103,
@@ -79,13 +79,13 @@
         "city": "Via Casteldebole 10 Bologna 40132"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:50:54.361Z"
+      "last_updated": "2025-12-04T19:08:44.922Z"
     },
     {
       "id": "Sardegna Arena",
       "stadium_name": "Sardegna Arena",
-      "lat": 39.215007,
-      "lon": 9.1052454,
+      "lat": 41.1095425,
+      "lon": 8.3276899,
       "capacity": null,
       "team": {
         "id": 104,
@@ -95,13 +95,13 @@
         "city": "Viale la Plaia 15 Cagliari 09123"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:50:55.284Z"
+      "last_updated": "2025-12-04T19:08:46.201Z"
     },
     {
       "id": "Stadio Comunale Luigi Ferraris",
       "stadium_name": "Stadio Comunale Luigi Ferraris",
-      "lat": 44.4252192,
-      "lon": 8.8248824,
+      "lat": 44.4164753,
+      "lon": 8.9525341,
       "capacity": null,
       "team": {
         "id": 107,
@@ -111,13 +111,13 @@
         "city": "Via Ronchi, 67 Genova 16155"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:50:56.410Z"
+      "last_updated": "2025-12-04T19:08:46.918Z"
     },
     {
       "id": "Stadio Giuseppe Meazza",
       "stadium_name": "Stadio Giuseppe Meazza",
-      "lat": 45.4654838,
-      "lon": 9.1953476,
+      "lat": 45.4782003,
+      "lon": 9.123964,
       "capacity": null,
       "team": {
         "id": 108,
@@ -127,13 +127,13 @@
         "city": "Corso Vittorio Emanuele II 9 Milano 20122"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:50:57.639Z"
+      "last_updated": "2025-12-04T19:08:47.942Z"
     },
     {
       "id": "Allianz Stadium",
       "stadium_name": "Allianz Stadium",
-      "lat": 45.06395,
-      "lon": 7.6694207,
+      "lat": 51.4560051,
+      "lon": -0.3415047,
       "capacity": null,
       "team": {
         "id": 109,
@@ -143,13 +143,13 @@
         "city": "Corso Galileo Ferraris, 32 Torino 10128"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:50:58.330Z"
+      "last_updated": "2025-12-04T19:08:48.939Z"
     },
     {
       "id": "Stadio Olimpico",
       "stadium_name": "Stadio Olimpico",
-      "lat": 42.0487256,
-      "lon": 12.4086692,
+      "lat": 41.9339424,
+      "lon": 12.4547705,
       "capacity": null,
       "team": {
         "id": 110,
@@ -159,13 +159,13 @@
         "city": "Via di Santa Cornelia, 1000 Formello 00060"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:50:59.482Z"
+      "last_updated": "2025-12-04T19:08:49.992Z"
     },
     {
       "id": "Stadio Ennio Tardini",
       "stadium_name": "Stadio Ennio Tardini",
-      "lat": 44.8033716,
-      "lon": 10.3287688,
+      "lat": 44.7947582,
+      "lon": 10.3383727,
       "capacity": null,
       "team": {
         "id": 112,
@@ -175,13 +175,13 @@
         "city": "Strada Carlo Pisacane, 4 Parma 43121"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:51:00.301Z"
+      "last_updated": "2025-12-04T19:08:50.914Z"
     },
     {
       "id": "Stadio San Paolo",
       "stadium_name": "Stadio San Paolo",
-      "lat": 0,
-      "lon": 0,
+      "lat": 40.827,
+      "lon": 14.193,
       "capacity": null,
       "team": {
         "id": 113,
@@ -191,13 +191,13 @@
         "city": "Centro Tecnico di Castel Volturno, Via S.S. Domitana, Km 35 Castel Volturno 81030"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:51:01.222Z"
+      "last_updated": "2025-12-04T19:08:50.914Z"
     },
     {
       "id": "Dacia Arena",
       "stadium_name": "Dacia Arena",
-      "lat": 0,
-      "lon": 0,
+      "lat": 46.081402,
+      "lon": 13.1997411,
       "capacity": null,
       "team": {
         "id": 115,
@@ -207,13 +207,13 @@
         "city": "Via Agostino e Angelo Candolini 2 Udine 33100"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:51:02.451Z"
+      "last_updated": "2025-12-04T19:08:51.937Z"
     },
     {
       "id": "Stadio Marc'Antonio Bentegodi",
       "stadium_name": "Stadio Marc'Antonio Bentegodi",
-      "lat": 45.4103635,
-      "lon": 10.9569676,
+      "lat": 0,
+      "lon": 0,
       "capacity": null,
       "team": {
         "id": 450,
@@ -223,13 +223,13 @@
         "city": "Via Evangelista Torricelli, 37 Verona 37136"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:51:03.271Z"
+      "last_updated": "2025-12-04T19:08:52.961Z"
     },
     {
       "id": "Stadio Giovanni Zin",
       "stadium_name": "Stadio Giovanni Zin",
-      "lat": 45.140044,
-      "lon": 10.0350005,
+      "lat": 0,
+      "lon": 0,
       "capacity": null,
       "team": {
         "id": 457,
@@ -239,13 +239,13 @@
         "city": "Via Persico, 19 Cremona 26100"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:51:04.295Z"
+      "last_updated": "2025-12-04T19:08:53.985Z"
     },
     {
       "id": "Mapei Stadium - Città del Tricolore",
       "stadium_name": "Mapei Stadium - Città del Tricolore",
-      "lat": 0,
-      "lon": 0,
+      "lat": 44.7145456,
+      "lon": 10.6497308,
       "capacity": null,
       "team": {
         "id": 471,
@@ -255,7 +255,7 @@
         "city": "Piazza Risorgimento, 47 Sassuolo 41049"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:51:05.524Z"
+      "last_updated": "2025-12-04T19:08:54.907Z"
     },
     {
       "id": "Arena Garibaldi - Stadio Romeo Anconetani",
@@ -271,13 +271,13 @@
         "city": "Piazza della Stazione 22 (scala A) Pisa null"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:51:06.445Z"
+      "last_updated": "2025-12-04T19:08:56.033Z"
     },
     {
       "id": "Stadio Olimpico di Torino",
       "stadium_name": "Stadio Olimpico di Torino",
-      "lat": 45.0660549,
-      "lon": 7.6806527,
+      "lat": 45.0417439,
+      "lon": 7.6492037,
       "capacity": null,
       "team": {
         "id": 586,
@@ -287,13 +287,13 @@
         "city": "Via Arcivescovado 1 Torino 10122"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:51:07.367Z"
+      "last_updated": "2025-12-04T19:08:56.955Z"
     },
     {
       "id": "Stadio Comunale Via Del Mare",
       "stadium_name": "Stadio Comunale Via Del Mare",
-      "lat": 40.3537196,
-      "lon": 18.1728902,
+      "lat": 0,
+      "lon": 0,
       "capacity": null,
       "team": {
         "id": 5890,
@@ -303,13 +303,13 @@
         "city": "Via Templari 11 Lecce 73100"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:51:08.288Z"
+      "last_updated": "2025-12-04T19:08:58.491Z"
     },
     {
       "id": "Stadio Giuseppe Sinigaglia",
       "stadium_name": "Stadio Giuseppe Sinigaglia",
-      "lat": 0,
-      "lon": 0,
+      "lat": 45.8138295,
+      "lon": 9.0723243,
       "capacity": null,
       "team": {
         "id": 7397,
@@ -319,7 +319,7 @@
         "city": "Viale Sinigaglia 2 Como 22100"
       },
       "source": "football-data.org",
-      "last_updated": "2025-12-04T18:51:09.415Z"
+      "last_updated": "2025-12-04T19:08:58.854Z"
     }
   ]
 }

@@ -30,26 +30,34 @@ function Map() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
-      {stadiums.map((stadium) => (
-        <Marker key={stadium.id} position={[stadium.lat, stadium.lon]}>
-          <Popup>
-            <div style={{textAlign: 'center'}}>
-              <strong>{stadium.stadium_name}</strong>
-              <br />
-              {stadium.team?.logo_url && (
-                <img src={stadium.team.logo_url} alt="logo" style={{width: 40, height: 40, margin: '6px auto'}} />
-              )}
-              <br />
-              Team: {stadium.team?.team_name || 'N/A'}
-              <br />
-              {stadium.team?.city && (<>
-                City: {stadium.team.city}
+      {stadiums.map((stadium) => {
+        // Use logo_url as custom marker icon if available
+        const icon = stadium.team?.logo_url
+          ? new L.Icon({
+              iconUrl: stadium.team.logo_url,
+              iconSize: [40, 40],
+              iconAnchor: [20, 40],
+              popupAnchor: [0, -40],
+              className: 'team-logo-marker',
+            })
+          : undefined;
+        return (
+          <Marker key={stadium.id} position={[stadium.lat, stadium.lon]} icon={icon}>
+            <Popup>
+              <div style={{textAlign: 'center'}}>
+                <strong>{stadium.stadium_name}</strong>
                 <br />
-              </>)}
-            </div>
-          </Popup>
-        </Marker>
-      ))}
+                {stadium.team?.logo_url && (
+                  <img src={stadium.team.logo_url} alt="logo" style={{width: 40, height: 40, margin: '6px auto'}} />
+                )}
+                <br />
+                Team: {stadium.team?.team_name || 'N/A'}
+                <br />
+              </div>
+            </Popup>
+          </Marker>
+        );
+      })}
     </MapContainer>
   );
 }
