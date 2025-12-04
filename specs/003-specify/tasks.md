@@ -7,12 +7,11 @@
 - [ ] T005 Host MVP frontend on Netlify/Vercel (netlify.toml/vercel.json)
 
 ## Phase 2: Game Highlighting & Daily Updates
-- [ ] T006 Create backend API scaffold (backend/app.js)
-- [ ] T007 [P] Implement daily game data fetch job (backend/jobs/fetchGames.js)
-- [ ] T008 [P] Store data in PostgreSQL (backend/models/)
-- [ ] T009 [P] Expose /api/map-data endpoint (backend/routes/mapData.js)
-- [ ] T010 [P] Add game highlighting logic to frontend (frontend/src/components/Map.js)
-- [ ] T011 Host backend on Heroku (Procfile, backend/)
+ [X] T006 Create backend API scaffold (backend/app.js)
+ [X] T009 [P] Expose /api/map-data endpoint (backend/app.js)
+ [ ] T007 [P] Implement daily game data fetch job (backend/jobs/fetchGames.js)
+ [ ] T010 [P] Add game highlighting logic to frontend (frontend/src/components/Map.js)
+ [ ] T011 Host backend on Heroku (Procfile, backend/)
 - [ ] T021 Implement API pagination and bounding box filtering (backend/routes/mapData.js)
 - [ ] T022 Validate and sanitize external data during ingestion (data/ingest.js, backend/models/)
 

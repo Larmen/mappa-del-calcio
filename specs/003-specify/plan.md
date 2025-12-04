@@ -4,7 +4,7 @@
 Deliver an interactive map of Italian soccer stadiums (Serie A/B/C) with game highlighting, using the most cost-effective and rapid tech stack.
 
 ## Tech Stack (Cheapest & Effective)
-- **Frontend:** React (Create React App or Vite), Mapbox GL JS (free tier, up to 50k map loads/month; fallback: Leaflet for zero cost)
+- **Frontend:** React (Create React App or Vite), Leaflet (open source, zero cost)
 - **Backend:** Node.js + Express (free on Heroku Hobby or AWS Free Tier)
 - **Database:** PostgreSQL (free on Heroku Hobby or AWS RDS Free Tier; SQLite for MVP/local dev)
 - **Data Source:** football-data.org (free tier for basic data; fallback: scrape public sites with polite rate limits)
@@ -39,8 +39,8 @@ Deliver an interactive map of Italian soccer stadiums (Serie A/B/C) with game hi
 
 ### Phase 1: MVP Data & Map
 - Ingest static stadium/team data from football-data.org or CSV scrape
-- Build React frontend with Mapbox GL JS (or Leaflet if cost is a concern)
-- Display stadium markers, popups with team/stadium info
+- Build React frontend with Leaflet
+- Display stadium markers, popups with only info available from API (e.g. team name, stadium name, logo, city)
 - Host MVP frontend on Netlify/Vercel
 
 ### Phase 2: Game Highlighting & Daily Updates
