@@ -1,9 +1,15 @@
 // Manual overrides for problematic stadiums
 const stadiumOverrides = {
+        "Stadio Giovanni Zin": { lat: 45.140044, lon: 10.0350005 }, // US Cremonese
+        "Arena Garibaldi - Stadio Romeo Anconetani": { lat: 43.7191, lon: 10.4036 }, // AC Pisa
+      "Stadio Marc'Antonio Bentegodi": { lat: 45.4104, lon: 10.9570 }, // Hellas Verona
+    "Stadio Comunale Via Del Mare": { lat: 40.3537, lon: 18.1729 }, // Lecce
   // Stadium name: [lat, lon]
   "Stadio San Paolo": { lat: 40.827, lon: 14.193 }, // Napoli
   "Stadio Atleti Azzurri d'Italia": { lat: 45.695, lon: 9.674 }, // Atalanta (old name, now Gewiss Stadium)
   "Gewiss Stadium": { lat: 45.695, lon: 9.674 }, // Atalanta (new name)
+  "Allianz Stadium": { lat: 45.1096, lon: 7.6413 }, // Juventus
+  "Allianz Stadium Juventus": { lat: 45.1096, lon: 7.6413 }, // Juventus (alternate name)
 };
 const express = require('express');
 const fs = require('fs');
@@ -43,6 +49,7 @@ async function fetchAndCacheStadiums() {
   const resp = await axios.get(url, { headers: { 'X-Auth-Token': API_TOKEN } });
   const teams = resp.data.teams;
   const stadiums = [];
+  console.log(teams.length, 'teams fetched from football-data.org');
   for (const team of teams) {
     // Use only stadium name for geocoding, with manual overrides for problematic stadiums
     let coords = { lat: 0, lon: 0 };
