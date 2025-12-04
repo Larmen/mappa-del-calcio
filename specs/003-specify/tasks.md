@@ -2,7 +2,7 @@
 ## Phase 1: MVP Data & Map
 - [X] T001 Create stadium/team data ingest script (data/ingest.js)
 - [X] T002 [P] Build React frontend scaffold (frontend/src/App.js)
-- [ ] T003 [P] Integrate Mapbox GL JS (frontend/src/components/Map.js)
+- [X] T003 [P] Integrate Mapbox GL JS (frontend/src/components/Map.js)
 - [ ] T004 [P] Display stadium markers and popups (frontend/src/components/Map.js)
 - [ ] T005 Host MVP frontend on Netlify/Vercel (netlify.toml/vercel.json)
 
