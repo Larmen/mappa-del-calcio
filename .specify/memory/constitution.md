@@ -1,50 +1,47 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Mappa di Calcio Constitution
 
-## Core Principles
+Purpose:
+- Provide an interactive map of Italian soccer stadiums for Serie A, Serie B, and Serie C, with team and game information and a usable, performant UI on desktop and mobile.
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+Scope:
+- Map markers for all stadiums in Serie A/B/C with popups showing team name, logo, stadium name, capacity, and a link to the team page.
+- Highlight stadiums with ongoing games on the current day.
+- Maintain an efficient daily update for static data (teams, stadiums) and a separate short-interval update mechanism for match status.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Primary goals / acceptance criteria:
+- All stadiums for Serie A/B/C are displayed with correct coordinates and a visible popup.
+- Game highlighting updates within a configurable target (e.g., 60–120s) when live mode is enabled.
+- Page loads under 2s on common mobile connections; map remains interactive with >100 markers.
+- Data ingestion tests validate schema and catch missing coordinates or logos.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+Primary Tech Stack:
+- Frontend: React; map rendering with Mapbox GL JS or Leaflet (Mapbox recommended for vector tiles/performance).
+- Backend: Node.js + Express; scheduled jobs for static updates; optional websocket/REST for live updates.
+- Scheduler: cron or serverless scheduler for daily data refresh; for live matches use either polling (configurable interval) or webhook integration if provider supports it.
+- Database: PostgreSQL with PostGIS (preferred) or MongoDB for storage and spatial queries.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+Data sources & licensing:
+- Prefer official/paid APIs (e.g., football-data.org, sportsdata.io). Document chosen provider, API keys, and rate limits.
+- If scraping is used, comply with robots.txt and provider Terms of Service. Implement polite request pacing, caching, and backoff strategies.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+Minimum data schema (stadium/team):
+- `id`, `team_name`, `league`, `stadium_name`, `capacity`, `logo_url`, `lat`, `lon`, `source`, `last_updated`
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Operational notes:
+- Static data: run a daily job to refresh teams/stadiums and logos.
+- Live game status: choose polling interval or implement webhooks/streaming depending on provider capabilities. Backoff on failures; maintain cache TTLs.
+- Map UX: cluster markers at low zoom; lazy-load logos and use placeholders; allow filtering by league and today’s games.
+- Error handling: show graceful placeholders when data is unavailable; log ingestion failures and send alerts for repeated failures.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+Testing & Deployment:
+- Unit tests for data ingestion and schema validation.
+- Integration tests for backend endpoints.
+- CI pipeline to run tests and deploy to chosen hosting; include DB migration steps.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Security & privacy:
+- Store API keys securely (environment variables or secret store).
+- Respect user privacy; do not collect personal user data for this project.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
-
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
-
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
-
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Notes:
+- Clarify "real-time" expectations: if true real-time is required, plan for webhooks/streaming or high-frequency polling and confirm provider support and rate limits.
+- Document the chosen data provider and maintain a fallback strategy in case of outages.
