@@ -31,14 +31,14 @@ function Map() {
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
       {stadiums.map((stadium) => {
-        // Use logo_url as custom marker icon if available
+        // Use logo_url as custom marker icon with white background and padding using L.divIcon
         const icon = stadium.team?.logo_url
-          ? new L.Icon({
-              iconUrl: stadium.team.logo_url,
-              iconSize: [40, 40],
-              iconAnchor: [20, 40],
-              popupAnchor: [0, -40],
-              className: 'team-logo-marker',
+          ? L.divIcon({
+              html: `<div class=\"team-marker-bg\"><img src='${stadium.team.logo_url}' alt='logo' style='width:40px;height:40px;'/></div>`,
+              className: 'team-marker-bg',
+              iconSize: [48, 48],
+              iconAnchor: [24, 48],
+              popupAnchor: [0, -48],
             })
           : undefined;
         return (
