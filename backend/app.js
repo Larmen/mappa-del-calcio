@@ -1,3 +1,49 @@
+const axios = require('axios');
+const express = require('express');
+const cors = require('cors');
+const app = express();
+// CORS must be first
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
+const cron = require('node-cron');
+const fs = require('fs');
+const path = require('path');
+
+// --- MATCH SYNC AND API ---
+let todayMatchesCache = { lastUpdated: null, matches: [] };
+
+async function fetchTodayMatches() {
+  const API_TOKEN = process.env.FOOTBALL_DATA_API_KEY || '';
+  if (!API_TOKEN) return [];
+  const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+  const url = `https://api.football-data.org/v4/competitions/SA/matches?dateFrom=${today}&dateTo=${today}`;
+  try {
+    const resp = await axios.get(url, { headers: { 'X-Auth-Token': API_TOKEN } });
+    return resp.data.matches || [];
+  } catch (err) {
+    console.error('Failed to fetch today matches:', err.message);
+    return [];
+  }
+}
+
+async function updateTodayMatchesCache() {
+  todayMatchesCache.matches = await fetchTodayMatches();
+  todayMatchesCache.lastUpdated = new Date().toISOString();
+}
+
+// Run at 02:00 every day
+cron.schedule('0 2 * * *', () => {
+  updateTodayMatchesCache();
+});
+
+// Also update on server start
+updateTodayMatchesCache();
+
+app.get('/api/matches-today', (req, res) => {
+  res.json({ data: todayMatchesCache.matches, lastUpdated: todayMatchesCache.lastUpdated });
+});
 // Manual overrides for problematic stadiums
 const stadiumOverrides = {
         "Stadio Giovanni Zin": { lat: 45.140044, lon: 10.0350005 }, // US Cremonese
@@ -11,18 +57,14 @@ const stadiumOverrides = {
   "Allianz Stadium": { lat: 45.1096, lon: 7.6413 }, // Juventus
   "Allianz Stadium Juventus": { lat: 45.1096, lon: 7.6413 }, // Juventus (alternate name)
 };
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const cors = require('cors');
-const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
 app.use(express.json());
 
-
-const axios = require('axios');
 
 // Geocode helper using OpenStreetMap Nominatim
 async function geocodeAddress(address) {
@@ -50,6 +92,17 @@ async function fetchAndCacheStadiums() {
   const teams = resp.data.teams;
   const stadiums = [];
   console.log(teams.length, 'teams fetched from football-data.org');
+
+  // Print teams playing today
+  try {
+    const todayMatchesResp = await axios.get(`https://api.football-data.org/v4/competitions/SA/matches?dateFrom=${new Date().toISOString().slice(0, 10)}&dateTo=${new Date().toISOString().slice(0, 10)}`, { headers: { 'X-Auth-Token': API_TOKEN } });
+    const todayMatches = todayMatchesResp.data.matches || [];
+    const teamsPlayingToday = todayMatches.map(m => `${m.homeTeam.name} vs ${m.awayTeam.name}`);
+    console.log('Teams playing today:', teamsPlayingToday.length ? teamsPlayingToday.join(' | ') : 'None');
+  } catch (err) {
+    console.log('Could not fetch today matches:', err.message);
+  }
+
   for (const team of teams) {
     // Use only stadium name for geocoding, with manual overrides for problematic stadiums
     let coords = { lat: 0, lon: 0 };

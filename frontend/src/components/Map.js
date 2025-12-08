@@ -31,6 +31,7 @@ function groupStadiumsByCoords(stadiums) {
 
 function Map() {
   const [stadiums, setStadiums] = useState([]);
+  const [matchesToday, setMatchesToday] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:4000/api/map-data')
@@ -38,6 +39,18 @@ function Map() {
       .then((data) => setStadiums(data.data || []))
       .catch(() => setStadiums([]));
   }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:4000/api/matches-today')
+      .then((res) => res.json())
+      .then((data) => setMatchesToday(data.data || []))
+      .catch(() => setMatchesToday([]));
+  }, []);
+
+  // Get set of home team IDs playing today
+  const homeTeamIds = useMemo(() => {
+    return new Set(matchesToday.map(match => match.homeTeam?.id));
+  }, [matchesToday]);
 
   // Group stadiums by coordinates
   const groups = useMemo(() => groupStadiumsByCoords(stadiums), [stadiums]);
@@ -56,10 +69,11 @@ function Map() {
         if (group.length === 1) {
           // Single team: marker at stadium
           const stadium = group[0];
+          const isPlayingToday = stadium.team && homeTeamIds.has(stadium.team.id);
           const icon = stadium.team?.logo_url
             ? L.divIcon({
-                html: `<div class=\"team-marker-bg\"><img src='${stadium.team.logo_url}' alt='logo' style='width:40px;height:40px;'/></div>`,
-                className: 'team-marker-bg',
+                html: `<div class=\"team-marker-bg${isPlayingToday ? ' team-marker-playing' : ''}\"><img src='${stadium.team.logo_url}' alt='logo' style='width:40px;height:40px;'/></div>`,
+                className: `team-marker-bg${isPlayingToday ? ' team-marker-playing' : ''}`,
                 iconSize: [48, 48],
                 iconAnchor: [24, 48],
                 popupAnchor: [0, -48],
@@ -84,10 +98,12 @@ function Map() {
         } else if (group.length === 2) {
           // Two teams: offset left/right
           const [teamA, teamB] = group;
+          const isPlayingA = teamA.team && homeTeamIds.has(teamA.team.id);
+          const isPlayingB = teamB.team && homeTeamIds.has(teamB.team.id);
           const iconA = teamA.team?.logo_url
             ? L.divIcon({
-                html: `<div class=\"team-marker-bg\"><img src='${teamA.team.logo_url}' alt='logo' style='width:40px;height:40px;'/></div>`,
-                className: 'team-marker-bg',
+                html: `<div class=\"team-marker-bg${isPlayingA ? ' team-marker-playing' : ''}\"><img src='${teamA.team.logo_url}' alt='logo' style='width:40px;height:40px;'/></div>`,
+                className: `team-marker-bg${isPlayingA ? ' team-marker-playing' : ''}`,
                 iconSize: [48, 48],
                 iconAnchor: [24, 48],
                 popupAnchor: [0, -48],
@@ -95,8 +111,8 @@ function Map() {
             : undefined;
           const iconB = teamB.team?.logo_url
             ? L.divIcon({
-                html: `<div class=\"team-marker-bg\"><img src='${teamB.team.logo_url}' alt='logo' style='width:40px;height:40px;'/></div>`,
-                className: 'team-marker-bg',
+                html: `<div class=\"team-marker-bg${isPlayingB ? ' team-marker-playing' : ''}\"><img src='${teamB.team.logo_url}' alt='logo' style='width:40px;height:40px;'/></div>`,
+                className: `team-marker-bg${isPlayingB ? ' team-marker-playing' : ''}`,
                 iconSize: [48, 48],
                 iconAnchor: [24, 48],
                 popupAnchor: [0, -48],

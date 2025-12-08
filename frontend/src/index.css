@@ -6,3 +6,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.team-marker-playing {
+  background: rgba(200,55,55,0.5) !important;
+}
