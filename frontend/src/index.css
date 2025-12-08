@@ -5,8 +5,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+
+.team-marker-playing img {
+  background: rgba(200,55,55,0.5) !important;
+  border-radius: 50%;
 }
 
 .team-marker-playing {
-  background: rgba(200,55,55,0.5) !important;
+  background: rgba(255,255,255,0.5) !important;
+}
+
+.team-marker-time {
+  font-size: 13px;
+  color: #222;
+  margin-top: 2px;
+  text-align: center;
+  font-weight: bold;
+  background: rgba(255,255,255,0.8);
+  border-radius: 8px;
+  padding: 1px 4px;
 }
