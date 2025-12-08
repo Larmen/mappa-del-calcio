@@ -1,0 +1,83 @@
+.todays-games-container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+  background: rgba(255,255,255,0.97);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  border-radius: 12px;
+  padding: 18px 22px 12px 22px;
+  min-width: 320px;
+  max-width: 400px;
+}
+
+.todays-games-container h3 {
+  margin: 0 0 12px 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+.todays-games-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todays-games-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+}
+
+.todays-games-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  padding: 4px 0;
+  height: 38px;
+}
+
+.todays-games-time {
+  font-weight: bold;
+  color: #1976d2;
+  min-width: 48px;
+  text-align: right;
+  padding-right: 8px;
+}
+
+.todays-games-home, .todays-games-away {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.todays-games-logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #eee;
+  border: 1px solid #ccc;
+}
+
+.todays-games-team {
+  min-width: 80px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.todays-games-vs {
+  font-weight: bold;
+  color: #444;
+  margin: 0 4px;
+  text-align: center;
+  min-width: 18px;
+}
+
+.todays-games-empty {
+  color: #888;
+  font-style: italic;
+  padding: 8px 0;
+}
