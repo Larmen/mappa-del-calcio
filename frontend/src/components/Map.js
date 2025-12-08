@@ -47,9 +47,26 @@ function Map() {
       .catch(() => setMatchesToday([]));
   }, []);
 
-  // Get set of home team IDs playing today
+  // Get set of home team IDs playing today and a lookup for kickoff times
   const homeTeamIds = useMemo(() => {
     return new Set(matchesToday.map(match => match.homeTeam?.id));
+  }, [matchesToday]);
+
+  // Map team ID to kickoff time (no conversion)
+  const teamKickoffMap = useMemo(() => {
+    const map = {};
+    matchesToday.forEach(match => {
+      if (match.homeTeam?.id) {
+        // Use local time directly
+        const kickoffDate = new Date(match.utcDate || match.date || match.kickoff || match.startTime);
+        if (!isNaN(kickoffDate)) {
+          const hours = kickoffDate.getHours().toString().padStart(2, '0');
+          const minutes = kickoffDate.getMinutes().toString().padStart(2, '0');
+          map[match.homeTeam.id] = `${hours}:${minutes}`;
+        }
+      }
+    });
+    return map;
   }, [matchesToday]);
 
   // Group stadiums by coordinates
@@ -70,13 +87,21 @@ function Map() {
           // Single team: marker at stadium
           const stadium = group[0];
           const isPlayingToday = stadium.team && homeTeamIds.has(stadium.team.id);
+          const kickoffTime = isPlayingToday ? teamKickoffMap[stadium.team.id] : null;
+          // Find today's match for this team
+          const todaysMatch = isPlayingToday ? matchesToday.find(m => m.homeTeam?.id === stadium.team.id) : null;
+          const opponent = todaysMatch ? todaysMatch.awayTeam?.name : null;
           const icon = stadium.team?.logo_url
             ? L.divIcon({
-                html: `<div class=\"team-marker-bg${isPlayingToday ? ' team-marker-playing' : ''}\"><img src='${stadium.team.logo_url}' alt='logo' style='width:40px;height:40px;'/></div>`,
+                html: `<div class=\"team-marker-bg${isPlayingToday ? ' team-marker-playing' : ''}\" style='display:flex;flex-direction:column;align-items:center;'>` +
+                  (kickoffTime ? `<div class='team-marker-time'>${kickoffTime}</div>` : '') +
+                  `<img src='${stadium.team.logo_url}' alt='logo' style='width:40px;height:40px;'/>
+` +
+                  `</div>`,
                 className: `team-marker-bg${isPlayingToday ? ' team-marker-playing' : ''}`,
-                iconSize: [48, 48],
-                iconAnchor: [24, 48],
-                popupAnchor: [0, -48],
+                iconSize: [48, 60],
+                iconAnchor: [24, 60],
+                popupAnchor: [0, -60],
               })
             : undefined;
           return (
@@ -91,6 +116,10 @@ function Map() {
                   <br />
                   Team: {stadium.team?.team_name || 'N/A'}
                   <br />
+                  {isPlayingToday && opponent && (
+                    <span>Playing today vs <strong>{opponent}</strong></span>
+                  )}
+                  <br />
                 </div>
               </Popup>
             </Marker>
@@ -100,22 +129,37 @@ function Map() {
           const [teamA, teamB] = group;
           const isPlayingA = teamA.team && homeTeamIds.has(teamA.team.id);
           const isPlayingB = teamB.team && homeTeamIds.has(teamB.team.id);
+          const kickoffA = isPlayingA ? teamKickoffMap[teamA.team.id] : null;
+          const kickoffB = isPlayingB ? teamKickoffMap[teamB.team.id] : null;
+          // Find today's match for each team
+          const matchA = isPlayingA ? matchesToday.find(m => m.homeTeam?.id === teamA.team.id) : null;
+          const matchB = isPlayingB ? matchesToday.find(m => m.homeTeam?.id === teamB.team.id) : null;
+          const opponentA = matchA ? matchA.awayTeam?.name : null;
+          const opponentB = matchB ? matchB.awayTeam?.name : null;
           const iconA = teamA.team?.logo_url
             ? L.divIcon({
-                html: `<div class=\"team-marker-bg${isPlayingA ? ' team-marker-playing' : ''}\"><img src='${teamA.team.logo_url}' alt='logo' style='width:40px;height:40px;'/></div>`,
+                html: `<div class=\"team-marker-bg${isPlayingA ? ' team-marker-playing' : ''}\" style='display:flex;flex-direction:column;align-items:center;'>` +
+                  (kickoffA ? `<div class='team-marker-time'>${kickoffA}</div>` : '') +
+                  `<img src='${teamA.team.logo_url}' alt='logo' style='width:40px;height:40px;'/>
+` +
+                  `</div>`,
                 className: `team-marker-bg${isPlayingA ? ' team-marker-playing' : ''}`,
-                iconSize: [48, 48],
-                iconAnchor: [24, 48],
-                popupAnchor: [0, -48],
+                iconSize: [48, 60],
+                iconAnchor: [24, 60],
+                popupAnchor: [0, -60],
               })
             : undefined;
           const iconB = teamB.team?.logo_url
             ? L.divIcon({
-                html: `<div class=\"team-marker-bg${isPlayingB ? ' team-marker-playing' : ''}\"><img src='${teamB.team.logo_url}' alt='logo' style='width:40px;height:40px;'/></div>`,
+                html: `<div class=\"team-marker-bg${isPlayingB ? ' team-marker-playing' : ''}\" style='display:flex;flex-direction:column;align-items:center;'>` +
+                  (kickoffB ? `<div class='team-marker-time'>${kickoffB}</div>` : '') +
+                  `<img src='${teamB.team.logo_url}' alt='logo' style='width:40px;height:40px;'/>
+` +
+                  `</div>`,
                 className: `team-marker-bg${isPlayingB ? ' team-marker-playing' : ''}`,
-                iconSize: [48, 48],
-                iconAnchor: [24, 48],
-                popupAnchor: [0, -48],
+                iconSize: [48, 60],
+                iconAnchor: [24, 60],
+                popupAnchor: [0, -60],
               })
             : undefined;
           return (
@@ -131,6 +175,10 @@ function Map() {
                     <br />
                     Team: {teamA.team?.team_name || 'N/A'}
                     <br />
+                    {isPlayingA && opponentA && (
+                      <span>Playing today vs <strong>{opponentA}</strong></span>
+                    )}
+                    <br />
                   </div>
                 </Popup>
               </Marker>
@@ -144,6 +192,10 @@ function Map() {
                     )}
                     <br />
                     Team: {teamB.team?.team_name || 'N/A'}
+                    <br />
+                    {isPlayingB && opponentB && (
+                      <span>Playing today vs <strong>{opponentB}</strong></span>
+                    )}
                     <br />
                   </div>
                 </Popup>
