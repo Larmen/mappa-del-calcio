@@ -76,7 +76,7 @@ function Map() {
   const OFFSET = 0.01;
 
   return (
-    <MapContainer center={[41.94, 12.45]} zoom={5} style={{ height: '400px', width: '100%' }}>
+    <MapContainer center={[41.94, 12.45]} zoom={5} style={{ height: '100%', width: '100%' }}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
