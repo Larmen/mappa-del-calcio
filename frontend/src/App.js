@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       <TodaysGames />
-      <h1>Mappa di Calcio</h1>
+      <h1>Mappa del Calcio</h1>
       <p>Welcome to the Italian Stadium Map MVP!</p>
       <Map />
     </div>
